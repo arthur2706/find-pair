@@ -64,7 +64,6 @@ class FindPairTest(unittest.TestCase):
     def test_pair_4(self):
         gifts, budget = validate(self.pricefile, 1100)
         selected_gifts = find_gifts_pair(gifts, budget)
-        print "{}".format(selected_gifts)
         self.assertFalse(selected_gifts)
 
     def test_pair_5(self):
@@ -81,7 +80,6 @@ class FindTrioTest(unittest.TestCase):
     def test_trio_1(self):
         gifts, budget = validate(self.pricefile, 2500)
         selected_gifts = find_gifts_trio(gifts, budget)
-        print "{}".format(selected_gifts)
         self.assertEqual(selected_gifts[0]['name'], "Candy Bar")
         self.assertEqual(selected_gifts[0]['price'], 500)
         self.assertEqual(selected_gifts[1]['name'], "Paperback Book")

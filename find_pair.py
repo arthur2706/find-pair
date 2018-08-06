@@ -11,14 +11,11 @@ def sum_price(gifts):
 def find_gifts_trio(gifts, budget):
     trio = []
     for i in range(len(gifts)):
-        gifts_excluding_i = gifts[:] # gifts[0:i-1] + gifts[i+1:]
+        gifts_excluding_i = gifts[:]
         del gifts_excluding_i[i]
-        print "gifts_excluding_i {0}".format(gifts_excluding_i)
         pair = find_gifts_pair(gifts_excluding_i, budget - gifts[i]['price'])
-        print "pair {0}".format(pair)
         if len(pair):
             candidate = [gifts[i]] + pair
-            print "candidate {0}".format(candidate)
             trio = candidate if sum_price(trio) < sum_price(candidate) else trio
 
     return sorted(trio, key=lambda g: g['price'])
@@ -30,16 +27,11 @@ def find_gifts_pair(gifts, budget):
     low = 0
 
     while high > low:
-        print "high {0}".format(gifts[high])
-        print "low {0}".format(gifts[low])
         if (gifts[low]['price'] + gifts[high]['price']) > budget and low < high-1:
-            print "dec high"
             high -= 1
         elif (gifts[low + 1]['price'] + gifts[high]['price']) <= budget and low+1 < high:
-            print "inc low"
             low += 1
         else:
-            print "break"
             break
 
     if sum_price([gifts[low], gifts[high]]) <= budget:
